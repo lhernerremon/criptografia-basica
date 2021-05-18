@@ -109,25 +109,15 @@ def decodificar_sustitucion(texto: str, salto: int):
 # Transposición
 def codificar_transposicion(msg, key):
     cipher = ""
-
-    # track key indices
     k_indx = 0
-
     msg_len = float(len(msg))
     msg_lst = list(msg)
     key_lst = sorted(list(key))
-    # calculate column of the matrix
     col = len(key)
-    # calculate maximum row of the matrix
     row = int(math.ceil(msg_len / col))
-    # add the padding character '?' in empty
-    # the empty cell of the matix
     fill_null = int((row * col) - msg_len)
     msg_lst.extend("?" * fill_null)
-    # create Matrix and insert message and
-    # padding characters row-wise
     matrix = [msg_lst[i : i + col] for i in range(0, len(msg_lst), col)]
-    # read matrix column-wise using key
     for _ in range(col):
         curr_idx = key.index(key_lst[k_indx])
         cipher += "".join([row[curr_idx] for row in matrix])
@@ -140,27 +130,16 @@ def codificar_transposicion(msg, key):
 
 def decodificar_transposicion(cipher, key):
     msg = ""
-    # track key indices
     k_indx = 0
-    # track msg indices
     msg_indx = 0
     msg_len = float(len(cipher))
     msg_lst = list(cipher)
-    # calculate column of the matrix
     col = len(key)
-    # calculate maximum row of the matrix
     row = int(math.ceil(msg_len / col))
-    # convert key into list and sort
-    # alphabetically so we can access
-    # each character by its alphabetical position.
     key_lst = sorted(list(key))
-    # create an empty matrix to
-    # store deciphered message
     dec_cipher = []
     for _ in range(row):
         dec_cipher += [[None] * col]
-    # Arrange the matrix column wise according
-    # to permutation order by adding into new matrix
     for _ in range(col):
         curr_idx = key.index(key_lst[k_indx])
 
@@ -168,7 +147,6 @@ def decodificar_transposicion(cipher, key):
             dec_cipher[j][curr_idx] = msg_lst[msg_indx]
             msg_indx += 1
         k_indx += 1
-    # convert decrypted msg matrix into a string
     try:
         msg = "".join(sum(dec_cipher, []))
     except TypeError:
@@ -204,28 +182,23 @@ def cifrado_relleno_una_vez(text: str, relleno: str):
 
 # Polialfabético
 def cifrado_polialfabetico(texto: str, k1: int, k2: int, orden: list):
-    if len(texto) % len(orden) == 0:
-        orden *= len(texto) // len(orden)
-        id_orden = 0
-        resultado = []
-        for char in texto:
-            k = k1 if orden[id_orden] == 1 else k2
-            resultado.append(codificar_sustitucion(char, k))
-            id_orden += 1
-        return "".join(var for var in resultado)
-    else:
-        raise Exception("orden no divisible por el texto")
+    orden *= len(texto) // len(orden) + 1
+    print(orden)
+    id_orden = 0
+    resultado = []
+    for char in texto:
+        k = k1 if orden[id_orden] == 1 else k2
+        resultado.append(codificar_sustitucion(char, k))
+        id_orden += 1
+    return "".join(var for var in resultado)
 
 
 def descifrado_polialfabetico(texto: str, k1: int, k2: int, orden: list):
-    if len(texto) % len(orden) == 0:
-        orden *= len(texto) // len(orden)
-        id_orden = 0
-        resultado = []
-        for char in texto:
-            k = k1 if orden[id_orden] == 1 else k2
-            resultado.append(decodificar_sustitucion(char, k))
-            id_orden += 1
-        return "".join(var for var in resultado)
-    else:
-        raise Exception("orden no divisible por el texto")
+    orden *= len(texto) // len(orden) + 1
+    id_orden = 0
+    resultado = []
+    for char in texto:
+        k = k1 if orden[id_orden] == 1 else k2
+        resultado.append(decodificar_sustitucion(char, k))
+        id_orden += 1
+    return "".join(var for var in resultado)

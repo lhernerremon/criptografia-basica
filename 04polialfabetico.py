@@ -4,7 +4,7 @@ from utilitarios import TextWithVar, cifrado_polialfabetico, descifrado_polialfa
 
 window = Tk()
 window.title("Seguridad informática | Polialfabético")
-window.geometry("800x600")
+window.geometry("600x700")
 
 frame = Frame(window)
 frame.pack()
@@ -33,47 +33,54 @@ def boton_decodificar():
 
 
 # Cifrado
-
 l1 = Label(frame, text="Texto a cifrar").grid(row=0, column=0)
-i1 = TextWithVar(frame, height=5, width=50, textvariable=texto1).grid(row=0, column=1, columnspan=5)
+i1 = TextWithVar(frame, height=5, width=50, textvariable=texto1).grid(row=0, column=1)
 
 l2 = Label(frame, text="k1").grid(row=1, column=0)
 i2 = Entry(frame, textvariable=k1).grid(row=1, column=1)
 
-l3 = Label(frame, text="k2").grid(row=1, column=2)
-i3 = Entry(frame, textvariable=k2).grid(row=1, column=3)
+l3 = Label(frame, text="k2").grid(row=2, column=0)
+i3 = Entry(frame, textvariable=k2).grid(row=2, column=1)
 
-l4 = Label(frame, text="Patron (lista)").grid(row=1, column=4)
-i4 = Entry(frame, textvariable=lista1).grid(row=1, column=5)
+l4 = Label(frame, text="Patron (lista)").grid(row=3, column=0)
+i4 = Entry(frame, textvariable=lista1).grid(row=3, column=1)
 
-button_cifrar = Button(frame, text="Cifrar", width=5, command=lambda: boton_codificar()).grid(row=2, column=2)
-
-ll1 = Label(frame, text="Resultado cifrado").grid(row=3, column=0)
-r1 = TextWithVar(frame, height=3, width=50, textvariable=codificado).grid(row=3, column=1, columnspan=5)
-
-
-e2 = Label(frame, text="-------------------------------------------------------------------").grid(
-    row=4, column=0, columnspan=6, pady=80
+button_cifrar = Button(frame, text="Cifrar", width=5, command=lambda: boton_codificar()).grid(
+    row=4, column=0, columnspan=2
 )
+
+ll1 = Label(frame, text="Resultado cifrado").grid(row=5, column=0)
+r1 = TextWithVar(frame, height=3, width=50, textvariable=codificado).grid(row=5, column=1)
+
+
+divisor = "***"
+e2 = Label(frame, text=f"{divisor*20}").grid(row=6, column=0, columnspan=2, pady=80)
 
 
 # Descifrado
-l5 = Label(frame, text="Texto a descifrar").grid(row=5, column=0)
-i5 = TextWithVar(frame, height=5, width=50, textvariable=texto2).grid(row=5, column=1, columnspan=5)
+l5 = Label(frame, text="Texto a descifrar").grid(row=7, column=0)
+i5 = TextWithVar(frame, height=5, width=50, textvariable=texto2).grid(row=7, column=1)
 
-l6 = Label(frame, text="k1").grid(row=6, column=0)
-i6 = Entry(frame, textvariable=k3).grid(row=6, column=1)
+l6 = Label(frame, text="k1").grid(row=8, column=0)
+i6 = Entry(frame, textvariable=k3).grid(row=8, column=1)
 
-l7 = Label(frame, text="k2").grid(row=6, column=2)
-i7 = Entry(frame, textvariable=k4).grid(row=6, column=3)
+l7 = Label(frame, text="k2").grid(row=9, column=0)
+i7 = Entry(frame, textvariable=k4).grid(row=9, column=1)
 
-l8 = Label(frame, text="Patron (lista)").grid(row=6, column=4)
-i8 = Entry(frame, textvariable=lista2).grid(row=6, column=5)
+l8 = Label(frame, text="Patron (lista)").grid(row=10, column=0)
+i8 = Entry(frame, textvariable=lista2).grid(row=10, column=1)
 
-button_cifrar = Button(frame, text="Descifrar", width=5, command=lambda: boton_decodificar()).grid(row=7, column=2)
+button_cifrar = Button(frame, text="Descifrar", width=5, command=lambda: boton_decodificar()).grid(
+    row=11, column=0, columnspan=2
+)
 
-ll2 = Label(frame, text="Resultado descifrado").grid(row=8, column=0)
-r1 = TextWithVar(frame, height=3, width=50, textvariable=decodificado).grid(row=8, column=2, columnspan=5)
-
+ll2 = Label(frame, text="Resultado descifrado").grid(row=12, column=0)
+r1 = TextWithVar(frame, height=3, width=50, textvariable=decodificado).grid(row=12, column=1)
 
 window.mainloop()
+
+# Ejemplo
+# "benito, te quiero."
+# k1=5
+# k2 = 19
+# [1, 1, 2, 1, 2]
