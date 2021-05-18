@@ -1,6 +1,6 @@
 from tkinter import *
 import ast
-from utilitarios import TextWithVar, cifrado_relleno_una_vez, cifrado_relleno_segunda_vez
+from utilitarios import TextWithVar, cifrado_relleno_una_vez
 
 window = Tk()
 window.title("Seguridad informática | Relleno")
@@ -19,13 +19,13 @@ decodificado = StringVar()
 
 
 def boton_codificar():
-    r1, r2 = cifrado_relleno_una_vez(texto1.get(), salto1.get())
-    codificado.set(f"{r2} \n{r1}")
+    r1, r2, r3 = cifrado_relleno_una_vez(texto1.get(), salto1.get())
+    codificado.set(f"{r1} \n{r2} \n{r3}")
 
 
 def boton_decodificar():
-    r1, r2 = cifrado_relleno_segunda_vez(ast.literal_eval(texto2.get()), salto2.get())
-    decodificado.set(r2)
+    r1, r2, r3 = cifrado_relleno_una_vez(texto2.get(), salto2.get())
+    decodificado.set(f"{r1} \n{r2} \n{r3}")
 
 
 # Cifrado
