@@ -58,3 +58,7 @@ r2 = TextWithVar(frame, height=3, width=50, textvariable=decodificado).grid(row=
 
 
 window.mainloop()
+
+# Ejemplo
+# tt = "pleasetransferonemilliondollarstomyswissbankaccountsixtwotwo"
+# pss = "MEGABUCK"

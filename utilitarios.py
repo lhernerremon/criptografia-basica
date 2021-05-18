@@ -200,3 +200,32 @@ def cifrado_relleno_una_vez(text: str, relleno: str):
     resultado_lista = [chr(num) for num in resultado_int]
     resultado_str = "".join(resultado_lista)
     return resultado_str, resultado_int, resultado_bin
+
+
+# Polialfabético
+def cifrado_polialfabetico(texto: str, k1: int, k2: int, orden: list):
+    if len(texto) % len(orden) == 0:
+        orden *= len(texto) // len(orden)
+        id_orden = 0
+        resultado = []
+        for char in texto:
+            k = k1 if orden[id_orden] == 1 else k2
+            resultado.append(codificar_sustitucion(char, k))
+            id_orden += 1
+        return "".join(var for var in resultado)
+    else:
+        raise Exception("orden no divisible por el texto")
+
+
+def descifrado_polialfabetico(texto: str, k1: int, k2: int, orden: list):
+    if len(texto) % len(orden) == 0:
+        orden *= len(texto) // len(orden)
+        id_orden = 0
+        resultado = []
+        for char in texto:
+            k = k1 if orden[id_orden] == 1 else k2
+            resultado.append(decodificar_sustitucion(char, k))
+            id_orden += 1
+        return "".join(var for var in resultado)
+    else:
+        raise Exception("orden no divisible por el texto")
